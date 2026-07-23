@@ -30,6 +30,13 @@ function App() {
     }
   };
 
+  const handleLogout = () => {
+    localStorage.removeItem('attodo_user_name');
+    setUserName('');
+    setCurrentView('dashboard');
+    setShowNameInput(true);
+  };
+
   const navigateTo = (view, taskType = 'pending') => {
     setCurrentView(view);
     if (taskType) setTaskType(taskType);
@@ -39,6 +46,11 @@ function App() {
     <div className="app-container">
       <nav className="navbar">
         <h1 className="navbar-title" onClick={() => navigateTo('dashboard')} style={{ cursor: 'pointer' }}>Attodo</h1>
+        {userName && !showNameInput && (
+          <button className="logout-btn" onClick={handleLogout} type="button">
+            Log out
+          </button>
+        )}
       </nav>
 
       {showNameInput && (
